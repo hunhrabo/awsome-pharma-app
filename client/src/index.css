@@ -13,7 +13,6 @@ html {
   font-weight: normal;
   line-height: 1.4em;
   font-size: 1.2em;
-  scroll-behavior: smooth;
 }
 
 *,
@@ -37,6 +36,48 @@ body {
 
 button {
   background: none;
+  font-family: inherit;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.loading-text {
+  margin-bottom: 20px;
+}
+
+.loading-icon {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 .content-wrap {
@@ -56,14 +97,13 @@ button {
   margin-bottom: 80px;
   padding: 10px 30px;
   background-color: white;
-  box-shadow: 0px 5px 5px 5px rgba(150, 150, 150, 0.1);
+  box-shadow: 0px 3px 10px 5px rgba(150, 150, 150, 0.1);
 }
 
 .table-container h2 {
   margin: 30px 0 50px;
   text-align: center;
   text-transform: uppercase;
-  /* text-decoration-line: underline; */
 }
 
 .top-revenue-table {
@@ -72,7 +112,7 @@ button {
   border-collapse: collapse;
 }
 
-.top-revenue-table .table-tab:hover {
+.top-revenue-table .table-tab p:hover {
   cursor: pointer;
 }
 
@@ -83,6 +123,10 @@ button {
 
 .top-revenue-table tr:nth-child(even) {
   background-color: rgb(245, 245, 245);
+}
+
+.top-revenue-table i {
+  margin: 0 5px;
 }
 
 .top-revenue-table td {
@@ -99,19 +143,34 @@ button {
   padding: 0 5px;
 }
 
+.btn-container {
+  text-align: center;
+}
+
+.btn-container button {
+  min-width: 100px;
+  padding: 5px 10px;
+  background-color: rgb(245, 245, 245);
+  border-radius: 5px;
+}
+
+.btn-container button:hover {
+  background-color: rgb(235, 235, 235);
+  cursor: pointer;
+}
+
 .chart-container {
   width: 100%;
   margin-bottom: 80px;
   padding: 10px 30px;
   background-color: white;
-  box-shadow: 0px 5px 5px 5px rgba(150, 150, 150, 0.1);
+  box-shadow: 0px 3px 10px 5px rgba(150, 150, 150, 0.1);
 }
 
 .chart-container h2 {
   margin: 30px 0 50px;
   text-align: center;
   text-transform: uppercase;
-  /* text-decoration-line: underline; */
 }
 
 .customer-select-form {
@@ -132,6 +191,11 @@ button {
   border-radius: 5px;
 }
 
-.chart-container .apexcharts-menu-icon {
+.chart .apexcharts-menu-icon {
   display: none;
+}
+
+.footer {
+  padding: 10px;
+  text-align: center;
 }

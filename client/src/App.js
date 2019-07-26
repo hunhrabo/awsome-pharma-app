@@ -125,14 +125,22 @@ const App = () => {
   }, []);
 
   if (sales.length === 0 || salesPerCustomers.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-div">
+        <h2 className="loading-text">Loading...</h2>
+        <i className="fas fa-spinner loading-icon" />
+      </div>
+    );
   } else {
     return (
-      <div className="content-wrap">
-        <h1>AwsomePharma Sales Team Annual Report</h1>
-        <TopRevenue sales={sales} />
-        <SalesChart salesPerCustomers={salesPerCustomers} months={months} />
-      </div>
+      <>
+        <main className="content-wrap">
+          <h1>AwsomePharma Sales Team Annual Report</h1>
+          <TopRevenue sales={sales} />
+          <SalesChart salesPerCustomers={salesPerCustomers} months={months} />
+        </main>
+        <footer className="footer">Created by Tamas Hrabovszki</footer>
+      </>
     );
   }
 };

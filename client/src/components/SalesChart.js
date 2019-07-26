@@ -54,6 +54,9 @@ const SalesChart = ({ salesPerCustomers, months }) => {
           }
         }
       },
+      chart: {
+        fontFamily: "Rubik"
+      },
       dataLabels: {
         enabled: true,
         formatter: val => Number(val),
@@ -163,6 +166,7 @@ const SalesChart = ({ salesPerCustomers, months }) => {
         </select>
       </form>
       <ReactApexChart
+        className="chart"
         options={chartData.options}
         series={chartData.series}
         type="bar"
