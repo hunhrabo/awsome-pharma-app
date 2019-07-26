@@ -129,6 +129,7 @@ const App = () => {
   } else {
     return (
       <div className="content-wrap">
+        <h1>AwsomePharma Sales Team Annual Report</h1>
         <TopRevenue sales={sales} />
         <SalesChart salesPerCustomers={salesPerCustomers} months={months} />
       </div>

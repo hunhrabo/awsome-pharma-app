@@ -65,9 +65,9 @@ const SalesChart = ({ salesPerCustomers, months }) => {
       },
       xaxis: {
         categories: months,
-        position: "top",
+        position: "bottom",
         labels: {
-          offsetY: -18
+          offsetY: 0
         },
         axisBorder: {
           show: false
@@ -112,16 +112,24 @@ const SalesChart = ({ salesPerCustomers, months }) => {
           show: false
         },
         labels: {
-          show: false,
+          show: true,
           formatter: val => Number(val)
+        },
+        title: {
+          text: "Products sold",
+          style: {
+            fontSize: "16px"
+          }
         }
       },
       title: {
-        text: "Monthly sales, 2018",
+        text: `Monthly sales - ${activeCustomer}, 2018`,
+        position: "top",
         floating: true,
-        offsetY: 320,
+        offsetY: -5,
         align: "center",
         style: {
+          fontSize: "20px",
           color: "#444"
         }
       }
@@ -135,50 +143,31 @@ const SalesChart = ({ salesPerCustomers, months }) => {
   };
 
   return (
-    <div>
+    <div className="chart-container">
+      <h2>Total products sold</h2>
+      <form className="customer-select-form">
+        <label htmlFor="customer-select">Select customer:</label>
+        <select
+          name="customer-select"
+          value={activeCustomer}
+          onChange={handleNameChange}
+        >
+          <option value="total">Total</option>
+          {salesPerCustomers.map(customer => {
+            return (
+              <option key={customer.name} value={customer.name}>
+                {customer.name}
+              </option>
+            );
+          })}
+        </select>
+      </form>
       <ReactApexChart
         options={chartData.options}
         series={chartData.series}
         type="bar"
-        height="350"
+        height="450"
       />
-      <form>
-        <label>
-          Select customer:
-          <select value={activeCustomer} onChange={handleNameChange}>
-            <option value="total">Total</option>
-            {salesPerCustomers.map(customer => {
-              return (
-                <option key={customer.name} value={customer.name}>
-                  {customer.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        {/* <label>
-          <input
-            type="radio"
-            value="total"
-            checked={activeCustomer === "total"}
-            onChange={handleNameChange}
-          />
-          total
-        </label>
-        {salesPerCustomers.map(customer => {
-          return (
-            <label key={customer.name}>
-              <input
-                type="radio"
-                value={customer.name}
-                checked={customer.name === activeCustomer}
-                onChange={handleNameChange}
-              />
-              {customer.name}
-            </label>
-          );
-        })} */}
-      </form>
     </div>
   );
 };

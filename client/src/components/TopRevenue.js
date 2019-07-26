@@ -69,12 +69,17 @@ const TopRevenue = ({ sales }) => {
 
   return (
     <div className="table-container">
+      <h2>Top salespersons</h2>
       <table className="top-revenue-table">
         <tbody>
           <tr className="table-header">
             <th>Name</th>
-            <th onClick={sortByRevenue}>Total revenue (EUR)</th>
-            <th onClick={sortByProductsSold}>Total products sold</th>
+            <th onClick={sortByRevenue} className="table-tab">
+              Total revenue (EUR)
+            </th>
+            <th onClick={sortByProductsSold} className="table-tab">
+              Total products sold
+            </th>
           </tr>
           {totalSales.map(person => {
             return (
