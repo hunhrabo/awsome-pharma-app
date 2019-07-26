@@ -1,0 +1,21 @@
+{
+  "name": "mini_case",
+  "version": "1.0.0",
+  "description": "html report for Veeva Systems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "watch": "nodemon watch index.js"
+  },
+  "author": "Tamas Hrabovszki",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "xlsx-to-json-lc": "^0.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
