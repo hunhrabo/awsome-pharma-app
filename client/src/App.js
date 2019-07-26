@@ -19,9 +19,10 @@ let months = [
 ];
 
 const App = () => {
-  const [sales, setSales] = useState([]);
+  const [salesPerPerson, setSalesPerPerson] = useState([]);
   const [salesPerCustomers, setSalesPerCustomers] = useState([]);
 
+  // run when component is mounted
   useEffect(() => {
     const fetchData = async () => {
       const salespersons = await axios
@@ -49,9 +50,11 @@ const App = () => {
       };
     };
 
+    // fetch data from backend
     fetchData()
       .then(salesData => {
-        let salesPerPerson = salesData.salespersons.map(salesperson => {
+        // restructure orders by salesperson
+        let salesPerSalesperson = salesData.salespersons.map(salesperson => {
           let person = {};
           person.name = salesperson.name;
           person.personId = salesperson.id;
@@ -83,6 +86,7 @@ const App = () => {
           return person;
         });
 
+        // restructure orders by customers
         let customers = new Set(salesData.orders.map(order => order.account));
         let customersArray = Array.from(customers);
 
@@ -111,20 +115,20 @@ const App = () => {
           return customerData;
         });
 
+        // return new datasets
         return {
-          salesPerPerson: salesPerPerson,
+          salesPerPerson: salesPerSalesperson,
           salesPerCustomer: salesOfCustomers
         };
       })
       .then(result => {
-        console.log(result);
-
-        setSales(result.salesPerPerson);
+        setSalesPerPerson(result.salesPerPerson);
         setSalesPerCustomers(result.salesPerCustomer);
       });
   }, []);
 
-  if (sales.length === 0 || salesPerCustomers.length === 0) {
+  // loading screen
+  if (salesPerPerson.length === 0 || salesPerCustomers.length === 0) {
     return (
       <div className="loading-div">
         <h2 className="loading-text">Loading...</h2>
@@ -132,11 +136,12 @@ const App = () => {
       </div>
     );
   } else {
+    // render site when data is ready
     return (
       <>
         <main className="content-wrap">
           <h1>AwsomePharma Sales Team Annual Report</h1>
-          <TopRevenue sales={sales} />
+          <TopRevenue salesPerPerson={salesPerPerson} />
           <SalesChart salesPerCustomers={salesPerCustomers} months={months} />
         </main>
         <footer className="footer">Created by Tamas Hrabovszki</footer>

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-const TopRevenue = ({ sales }) => {
+const TopRevenue = ({ salesPerPerson }) => {
   // total sales per salesperson
-  const [totalSales, setTotalSales] = useState(sales);
+  const [totalSales, setTotalSales] = useState(salesPerPerson);
   const [tableStatus, setTableStatus] = useState("collapsed");
   const [orderedBy, setOrderedBy] = useState("revenue");
 
-  // const [revenueOrder, setRevenueOrder] = useState("");
-  // const [productsSoldOrder, setProductsSoldOrder] = useState("");
-
+  // reorder salespersons by revenue - top to low
   useEffect(() => {
     setTotalSales(
-      sales
+      salesPerPerson
         .map(person => {
           let name = person.name;
           let totalRevenue = person.monthlySales
@@ -33,56 +31,29 @@ const TopRevenue = ({ sales }) => {
           return b.totalRevenue - a.totalRevenue;
         })
     );
-    // setRevenueOrder("descending");
-  }, [sales]);
+  }, [salesPerPerson]);
 
+  // handler functions for reordering table data
   const sortByRevenue = () => {
     let copyOfSales = [...totalSales];
+
     copyOfSales.sort((a, b) => {
       return b.totalRevenue - a.totalRevenue;
     });
+
     setOrderedBy("revenue");
     setTotalSales(copyOfSales);
-    // if (revenueOrder === "" || revenueOrder === "descending") {
-    //   copyOfSales.sort((a, b) => {
-    //     return a.totalRevenue - b.totalRevenue;
-    //   });
-    //   setRevenueOrder("ascending");
-    //   setProductsSoldOrder("");
-    //   setTotalSales(copyOfSales);
-    // } else if (revenueOrder === "ascending") {
-    //   copyOfSales.sort((a, b) => {
-    //     return b.totalRevenue - a.totalRevenue;
-    //   });
-    //   setRevenueOrder("descending");
-    //   setProductsSoldOrder("");
-    //   setTotalSales(copyOfSales);
-    // }
   };
 
   const sortByProductsSold = () => {
     let copyOfSales = [...totalSales];
+
     copyOfSales.sort((a, b) => {
       return b.totalProductsSold - a.totalProductsSold;
     });
+
     setOrderedBy("products");
     setTotalSales(copyOfSales);
-
-    // if (productsSoldOrder === "" || productsSoldOrder === "descending") {
-    //   copyOfSales.sort((a, b) => {
-    //     return a.totalProductsSold - b.totalProductsSold;
-    //   });
-    //   setProductsSoldOrder("ascending");
-    //   setRevenueOrder("");
-    //   setTotalSales(copyOfSales);
-    // } else if (productsSoldOrder === "ascending") {
-    //   copyOfSales.sort((a, b) => {
-    //     return b.totalProductsSold - a.totalProductsSold;
-    //   });
-    //   setProductsSoldOrder("descending");
-    //   setRevenueOrder("");
-    //   setTotalSales(copyOfSales);
-    // }
   };
 
   const handleTableDisplay = () => {
@@ -90,8 +61,10 @@ const TopRevenue = ({ sales }) => {
     setTableStatus(newStatus);
   };
 
+  // dinamically change elements attributes
   const buttonText =
     tableStatus === "collapsed" ? "Show more..." : "Show less...";
+
   const personsToShow = tableStatus === "collapsed" ? 3 : totalSales.length;
 
   return (
@@ -111,7 +84,6 @@ const TopRevenue = ({ sales }) => {
                   style={{
                     visibility: orderedBy === "revenue" ? "visible" : "hidden"
                   }}
-                  // visibility={orderedBy === "revenue" ? "visible" : "hidden"}
                 />
               </p>
             </th>
@@ -123,7 +95,6 @@ const TopRevenue = ({ sales }) => {
                   style={{
                     visibility: orderedBy === "products" ? "visible" : "hidden"
                   }}
-                  // visibility={orderedBy === "products" ? "visible" : "hidden"}
                 />
               </p>
             </th>

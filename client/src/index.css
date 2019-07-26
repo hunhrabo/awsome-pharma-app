@@ -90,6 +90,7 @@ button {
   margin-top: 20px;
   margin-bottom: 50px;
   text-align: center;
+  line-height: 1.5em;
 }
 
 .table-container {

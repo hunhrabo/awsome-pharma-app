@@ -3,10 +3,9 @@ import ReactApexChart from "react-apexcharts";
 
 const SalesChart = ({ salesPerCustomers, months }) => {
   const [totalSalesPerMonth, setTotalSalesPerMonth] = useState([]);
-  // const [activePerson, setActivePerson] = useState("total");
   const [activeCustomer, setActiveCustomer] = useState("total");
-  console.log(salesPerCustomers);
 
+  // restructure data based on selected customer
   useEffect(() => {
     if (activeCustomer !== "total") {
       let currentCustomer = salesPerCustomers.find(
@@ -41,10 +40,12 @@ const SalesChart = ({ salesPerCustomers, months }) => {
     }
   }, [salesPerCustomers, months, activeCustomer]);
 
+  // handler function for form data change
   const handleNameChange = e => {
     setActiveCustomer(e.target.value);
   };
 
+  // chart parameters
   const chartData = {
     options: {
       plotOptions: {
