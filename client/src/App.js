@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Logo from "./logo_transparent.png";
 import TopRevenue from "./components/TopRevenue";
 import SalesChart from "./components/SalesChart";
 
@@ -19,6 +20,7 @@ const months = [
 ];
 
 const url = "/api";
+// const url = "http://localhost:3001/api";
 
 const App = () => {
   const [salesPerPerson, setSalesPerPerson] = useState([]);
@@ -138,6 +140,7 @@ const App = () => {
     return (
       <>
         <main className="content-wrap">
+          <img src={Logo} alt="AwsomePharma logo" />
           <h1>AwsomePharma Sales Team Annual Report</h1>
           <TopRevenue salesPerPerson={salesPerPerson} />
           <SalesChart salesPerCustomers={salesPerCustomers} months={months} />
