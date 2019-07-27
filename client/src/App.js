@@ -3,7 +3,7 @@ import axios from "axios";
 import TopRevenue from "./components/TopRevenue";
 import SalesChart from "./components/SalesChart";
 
-let months = [
+const months = [
   "January",
   "February",
   "March",
@@ -18,6 +18,8 @@ let months = [
   "December"
 ];
 
+const url = "/api";
+
 const App = () => {
   const [salesPerPerson, setSalesPerPerson] = useState([]);
   const [salesPerCustomers, setSalesPerCustomers] = useState([]);
@@ -26,22 +28,18 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const salespersons = await axios
-        .get("http://localhost:3001/api/salespersons")
+        .get(`${url}/salespersons`)
         .then(result => {
           return result.data.data.filter(item => item.id !== "");
         });
 
-      const orders = await axios
-        .get("http://localhost:3001/api/orders")
-        .then(result => {
-          return result.data.data.filter(items => items.account !== "");
-        });
+      const orders = await axios.get(`${url}/orders`).then(result => {
+        return result.data.data.filter(items => items.account !== "");
+      });
 
-      const products = await axios
-        .get("http://localhost:3001/api/products")
-        .then(result => {
-          return result.data.data.filter(item => item["product name"] !== "");
-        });
+      const products = await axios.get(`${url}/products`).then(result => {
+        return result.data.data.filter(item => item["product name"] !== "");
+      });
 
       return {
         salespersons,
