@@ -87,8 +87,7 @@ button {
 }
 
 .content-wrap h1 {
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin: 20px 0 50px;
   text-align: center;
   line-height: 1.5em;
 }
@@ -119,7 +118,6 @@ button {
 
 .top-revenue-table tr {
   height: 40px;
-  /* border-bottom: 1px solid rgb(220, 220, 220); */
 }
 
 .top-revenue-table tr:nth-child(even) {
@@ -199,4 +197,46 @@ button {
 .footer {
   padding: 10px;
   text-align: center;
+}
+
+@media screen and (max-width: 1600px) {
+  .content-wrap {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  html {
+    line-height: 0.9em;
+    font-size: 0.9em;
+  }
+
+  .content-wrap {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  html {
+    line-height: 0.9em;
+    font-size: 0.7em;
+  }
+
+  .content-wrap {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .content-wrap h2 {
+    margin: 10px 0 25px;
+  }
+
+  .top-revenue-table tr {
+    height: 30px;
+  }
+
+  .table-container,
+  .chart-container {
+    padding: 10px;
+  }
 }

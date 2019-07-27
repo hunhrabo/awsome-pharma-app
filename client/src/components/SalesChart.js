@@ -133,7 +133,7 @@ const SalesChart = ({ salesPerCustomers, months }) => {
         offsetY: -5,
         align: "center",
         style: {
-          fontSize: "20px",
+          fontSize: "16px",
           color: "#444"
         }
       }
